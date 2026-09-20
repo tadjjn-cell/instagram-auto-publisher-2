@@ -3,23 +3,15 @@ telegram:
   source_chat: "me" # "me" = your own Saved Messages, shared with the other pipelines.
   require_tag: "ig2:" # Only videos whose caption starts with this tag belong to this (2nd) Instagram account. Tag is stripped off before use as the topic.
 
-# Digital products this account promotes (store: claimthis.site). Captions become "value first,
-# sell second": the AI picks the ONE item that matches each video's topic (or none if nothing fits)
-# and ends with the CTA. Instagram captions are not clickable: put the store link in the bio.
+# No shop for this account: it is a pure content account (Snapchat best-friends-list tips).
 product:
-  enabled: true
-  store: "Claim This"
-  cta: "Link in bio"
-  shopify_url: "https://www.claimthis.site" # catalog is read from <url>/products.json on every run (new products appear automatically)
-  extra_items: [] # products NOT in the store, e.g. - {name: "...", description: "..."}
-  fallback_items: # used only if the store can't be reached
+  enabled: false
 
-    - name: "The Sandwich Generation Starter Pack"
-      description: "4 printables for caregivers raising kids while caring for aging parents"
-    - name: "The ADHD Meltdown Toolkit"
-      description: "printable calm-down strategies for parents when ADHD meltdowns happen"
-    - name: "Type 2 Diabetes Daily Companion"
-      description: "printable daily tracking pack for people managing their type 2 diabetes routine"
+# What this account is about. The AI keeps every caption on-topic for this audience and ends with the CTA.
+niche:
+  description: "how to see and understand the Snapchat best friends (BSF) list: what the emojis and best-friends order mean, where to find the list in the app, and Snapchat settings/tips"
+  cta: "Follow for more Snapchat tips"
+  rules: "Only describe things Snapchat officially shows or lets users do. Never promise ways to see private information, never mention hacks, spy tools, third-party apps or logins, no fake claims about what a specific person does. Do NOT write step-by-step instructions or app menu paths (the video shows the steps and you cannot verify them): hint at what the video reveals instead. Hashtags: never use words like hack, secret, spy or stalk, and never a year. No URLs in the caption."
 
 # AI Configuration (Groq, free tier)
 ai:

@@ -65,6 +65,18 @@ Hard rules: these are printable organizers and templates, NOT medical products o
     else:
         product_rules = ""
 
+    niche = config.get("niche", {})
+    niche_rules = ""
+    if niche.get("description"):
+        niche_rules = f"""
+This account is about: {niche['description']}. Keep the caption strictly on-topic for that audience."""
+        if niche.get("cta"):
+            niche_rules += f"""
+End the caption with this exact call-to-action on its own line: "{niche['cta']}"."""
+        if niche.get("rules"):
+            niche_rules += f"""
+Hard rules: {niche['rules']}"""
+
     response_text = await call_groq_with_retry(
         client,
         model=model,
@@ -83,7 +95,7 @@ Hard rules: these are printable organizers and templates, NOT medical products o
 Currently trending/rising search queries around this topic (last 7 days): {trending_str}
 
 Rules:
-- caption: 2-5 short lines. First line is the hook (shown before "...more"). Emojis allowed but not excessive.{product_rules}
+- caption: 2-5 short lines. First line is the hook (shown before "...more"). Emojis allowed but not excessive.{product_rules}{niche_rules}
 - hashtags: a list of 8-15 hashtags (no # symbol, code will add it): mix a couple of broad reach tags with specific/trending niche tags. Prioritize wording from the trending queries when it fits.
 
 Return JSON with exactly these keys: caption, hashtags""",
